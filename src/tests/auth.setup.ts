@@ -15,7 +15,7 @@ const roles = [
 const pass = 'secret_sauce';
 
 for (const role of roles) {
-    setup('authenticate as ' + role.name, async ({ page }) => {
+    setup(`authenticate as ${role.name}`, async ({ page }) => {
         // New LoginPage class + Navigation step:
         const loginPage = new PageManager(page).login;
         await loginPage.navigate();
