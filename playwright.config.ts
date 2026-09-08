@@ -12,7 +12,7 @@ import { defineConfig, devices } from '@playwright/test';
  * See https://playwright.dev/docs/test-configuration.
  */
 export default defineConfig({
-  testDir: './src/spec',
+  testDir: './src/tests',
   /* Run tests in files in parallel */
   fullyParallel: true,
   /* Fail the build on CI if you accidentally left test.only in the source code. */
@@ -36,10 +36,21 @@ export default defineConfig({
   },
 
   /* Configure projects for major browsers */
-  projects: [
+  projects: [ 
+    // Setup project, will be executed first to generate a .json file.
+    // Then project will use this user.json for authentication throught the tests:
+    { name: 'setup', testMatch: /.*\.setup\.ts/ },
+
     {
-      name: 'chromium',
-      use: { ...devices['Desktop Chrome'] },
+      name: 'standard_user',
+      use: { 
+        ...devices['Desktop Chrome'],         
+        // This project should use the storage state saved into user.json:
+        //storageState: 'playwright/.auth/user_standard.json',
+       },
+       // To receive the storage state, we run a dependency setup project.
+       // This project depends on the setup project to run first and create the user.json file
+      dependencies: ['setup'],
     },
 
     // {
