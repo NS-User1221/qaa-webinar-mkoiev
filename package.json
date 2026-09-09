@@ -9,8 +9,8 @@
   "author": "maksym.koiev",
   "license": "ISC",
   "devDependencies": {
-    "@playwright/test": "^1.55.0",
-    "@types/node": "^24.5.2"
+    "@playwright/test": "^1.62.1",
+    "@types/node": "^24.13.3"
   },
   "dependencies": {
     "axios": "^1.12.2"
