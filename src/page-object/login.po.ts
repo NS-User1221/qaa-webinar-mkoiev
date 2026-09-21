@@ -11,12 +11,12 @@ export class LoginPage {
         return this.page.getByPlaceholder('Password');
     }
     get loginButton() {
-        return this.page.getByRole('button', {name: 'Login'}).click();
+        return this.page.getByRole('button', {name: 'Login'});
     }
     get logo() {
         return this.page.getByRole('img', {name: 'Swag Labs'});
     }
     async navigate() {
-        await this.page.goto(`https://www.saucedemo.com/`);
+        await this.page.goto(`/`);
     }
 }

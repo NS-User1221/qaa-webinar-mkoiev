@@ -37,19 +37,10 @@ export default defineConfig({
 
   /* Configure projects for major browsers */
   projects: [ 
-    // Setup project, will be executed first to generate a .json file.
-    // Then project will use this user.json for authentication throught the tests:
     { name: 'setup', testMatch: /.*\.setup\.ts/ },
-
     {
-      name: 'standard_user',
-      use: { 
-        ...devices['Desktop Chrome'],         
-        // This project should use the storage state saved into user.json:
-        //storageState: 'playwright/.auth/user_standard.json',
-       },
-       // To receive the storage state, we run a dependency setup project.
-       // This project depends on the setup project to run first and create the user.json file
+      name: 'chromium',
+      use: { ...devices['Desktop Chrome'] },
       dependencies: ['setup'],
     },
 

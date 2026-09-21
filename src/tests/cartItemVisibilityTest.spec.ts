@@ -1,30 +1,46 @@
-import { test, expect } from '@playwright/test';
-import { PageManager } from '../page-object/page-manager';
+import { expect } from '@playwright/test';
+import { test } from '../fixture/test.fixture';
+//import { PageManager } from '../page-object/page-manager';
 
-// test.beforeEach('login', async ({ page }) => {
-//   await page.goto('https://www.saucedemo.com/');
-// });
 
 test.describe('standard user tests', () => {
-    test.use ({ storageState: 'playwright/.auth/user_standard.json' });
+    test.use ({ storageState: 'playwright/.auth/standard_user.json' });
 
     test(
       'Item is visible when logged in as standard user and adding an item and navigating to the cart page', 
-      async ({ page }) => {
+      async ({ pages }) => {
+        const homePage = pages.home
 
-        // Navigate to home page and add the backpack item to the cart:
-        const homePage = new PageManager(page).home
         await homePage.navigate();
         await homePage.addToCartBackpackButton.click();
-        
-        // Navigate directly to the shopping cart page and verify page URL is correct:
-        const shoppingCartPage = new PageManager(page).shoppingCart;
-        await shoppingCartPage.navigate();
-        await expect(page).toHaveURL('https://www.saucedemo.com/cart.html');
 
-        // Verify the backpack item is visible:
+        const shoppingCartPage = pages.shoppingCart;
+        await shoppingCartPage.navigate();
+
         const cartItem = shoppingCartPage.inventoryItem;
         await expect(cartItem, 'The cart item is visible').toBeVisible();
-        await expect(cartItem, 'The cart item title is correct').toContainText('Sauce Labs Backpack');        
+        await expect(cartItem, 'The cart item title is correct').toContainText('Sauce Labs Backpack');
+    });
+});
+
+
+test.describe('Locked out user tests', () => {
+    test.use ({ storageState: 'playwright/.auth/locked_out_user.json' });
+
+    test(
+      'Locked out user is not able to login, error message is displayed', 
+      async ({ pages }) => {
+        // bla bla
+    });
+});
+
+
+test.describe('Problem user tests', () => {
+    test.use ({ storageState: 'playwright/.auth/problem_user.json' });
+
+    test(
+      'Problem user is not able to login, error message is displayed', 
+      async ({ pages }) => {
+        // bla bla 
     });
 });
