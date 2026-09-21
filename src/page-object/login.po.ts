@@ -5,18 +5,18 @@ export class LoginPage {
     }
     
     get usernameInput() {
-        return this.page.locator('input[data-test="username"]');
+        return this.page.getByPlaceholder('Username');
     }
     get passwordInput() {
-        return this.page.locator('input[data-test="password"]');
+        return this.page.getByPlaceholder('Password');
     }
     get loginButton() {
-        return this.page.locator('#login-button');
+        return this.page.getByRole('button', {name: 'Login'});
     }
     get logo() {
-        return this.page.locator(".login_logo");
+        return this.page.getByRole('img', {name: 'Swag Labs'});
     }
-    navigate() {
-        return this.page.goto(`/`);
+    async navigate() {
+        await this.page.goto(`/`);
     }
 }

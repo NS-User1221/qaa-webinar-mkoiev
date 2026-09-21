@@ -5,7 +5,7 @@ type TFixture = {
     pages: PageManager
 }
 
-const test = baseTest.extend<TFixture>({
+export const test = baseTest.extend<TFixture>({
     pages: async ({page}, use) => {
         await use(new PageManager(page));
     }

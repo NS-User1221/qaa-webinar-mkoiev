@@ -1,8 +1,10 @@
-import {HomePage} from "./home.po";
-import {LoginPage} from "./login.po";
+import { HomePage } from "./home.po";
+import { LoginPage } from "./login.po";
+import { ShoppingCartPage } from "./shoppingCart.po";
+import { Page } from '@playwright/test'
 
 export class PageManager {
-    constructor(private readonly page) {
+    constructor(private readonly page: Page) {
     }
 
     get home() {
@@ -11,5 +13,9 @@ export class PageManager {
 
     get login() {
         return new LoginPage(this.page);
+    }
+
+    get shoppingCart() {
+        return new ShoppingCartPage(this.page);
     }
 }
